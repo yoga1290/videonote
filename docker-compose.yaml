@@ -1,0 +1,20 @@
+version: '3.7'
+
+services:
+
+  npm-install:
+    image: node:21-alpine
+    command: npm i
+    working_dir: /usr/app
+    volumes:
+    - ./:/usr/app/
+
+  npm-build:
+    depends_on:
+      npm-install:
+        condition: service_completed_successfully
+    image: node:21-alpine
+    command: npm run build
+    working_dir: /usr/app
+    volumes:
+    - ./:/usr/app/

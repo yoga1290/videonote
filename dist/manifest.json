@@ -1,0 +1,40 @@
+{
+  "manifest_version": 2,
+  "name": "VideoNote",
+  "version": "1.0",
+  "description": "See https://github.com/yoga1290/videonote#readme",
+  "browser_specific_settings": {
+      "gecko": {
+        "data_collection_permissions": {
+          "required": ["none"]
+        }
+      }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/watch?*v=*", "https://youtube.com/watch?*v=*"],
+      "js": ["youtube.js"]
+    }, {
+      "matches": ["https://m.youtube.com/watch?v=*"],
+      "js": ["youtube-mobile.js"]
+    }, {
+      "matches": ["https://vkvideo.ru/video*"],
+      "js": ["vkvideo.js"]
+    }, {
+      "matches": ["https://m.vkvideo.ru/video*"],
+      "js": ["vkvideo-mobile.js"]
+    }, {
+      "matches": ["https://*.bilibili.tv/*/video/*", "https://*.bilibili.tv/*/play/*"],
+      "js": ["bilibili.js"]
+    }
+    
+  ],
+
+  "permissions": [
+    "storage"
+  ]
+  
+}
+
+
+
