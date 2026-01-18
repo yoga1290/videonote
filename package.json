@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "update:manifest": "sh +x ci/update-manifest/update-manifest.sh",
     "build:webpack": "webpack --mode=production --config ./src/webpack.config.js",
     "build:webpack:dev": "webpack --config ./src/webpack.config.js --progress --mode=development",
     "build:firefox": "web-ext build --overwrite-dest --source-dir ./dist/",

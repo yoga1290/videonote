@@ -8,13 +8,24 @@ services:
     working_dir: /usr/app
     volumes:
     - ./:/usr/app/
+  
+  update-manifiest:
+    depends_on:
+      npm-install:
+        condition: service_completed_successfully
+    image: alpine:3
+    command: /bin/sh +x /usr/app/ci/update-manifest/update-manifest.sh
+    working_dir: /usr/app
+    volumes:
+    - ./:/usr/app/
 
   npm-build:
     depends_on:
-      npm-install:
+      update-manifiest:
         condition: service_completed_successfully
     image: node:21-alpine
     command: npm run build
     working_dir: /usr/app
     volumes:
     - ./:/usr/app/
+  

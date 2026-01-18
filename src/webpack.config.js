@@ -1,31 +1,38 @@
+const { optimize } = require("webpack");
+
 module.exports = {
+  context: __dirname,
   entry: {
-    // 'common': {
-    //   import: [
-    //     // "./views/style.js",
-    //     "./views/style.scss",
-    //     // "./views/components.js",
-    //     // "./controllers/BaseController.js",
-    //   ],
-    // },
+    'base-bundle': [ './controllers/BaseController.js' ],
     'youtube': {
-      import: [__dirname + '/controllers/YoutubeController.js'],
+      dependOn: 'base-bundle',
+      import: ['./controllers/YoutubeController.js'],
     },
     'youtube-mobile': {
-      import: [__dirname + '/controllers/YoutubeMobileController.js'],
+      dependOn: 'base-bundle',
+      import: ['./controllers/YoutubeMobileController.js'],
     },
     'bilibili': {
-      import: [__dirname + '/controllers/BiliBiliController.js'],
+      dependOn: 'base-bundle',
+      import: ['./controllers/BiliBiliController.js'],
     },
     'vkvideo': {
-      import: [__dirname + '/controllers/vkVideoController.js'],
+      dependOn: 'base-bundle',
+      import: ['./controllers/vkVideoController.js'],
     },
     'vkvideo-mobile': {
-      import: [__dirname + '/controllers/vkVideoMobileController.js'],
+      dependOn: 'base-bundle',
+      import: ['./controllers/vkVideoMobileController.js'],
     },
-    // 'dailymotion': {
-    //   import: [__dirname + '/controllers/DailyMotionController.js'],
-    // }
+  },
+
+  optimization: {
+    chunkIds: 'size',
+    moduleIds: 'size',
+    concatenateModules: true,
+    innerGraph: true,
+    minimize: true,
+    usedExports: true,
   },
 
   output: {

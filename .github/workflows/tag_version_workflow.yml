@@ -1,0 +1,25 @@
+name: tag-version
+
+on:
+  push:
+    branches: [ master, main ]
+
+jobs:
+
+  tag-version:
+
+    permissions:
+     checks: write
+     contents: write
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Create and push new tag
+      env:
+        GITHUB_REPOSITORY: ${{github.repository}}
+        GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+        GITHUB_TOKEN: ${{ secrets.github_token }}
+      run: |
+        bash +x ./ci/update-manifest/update-manifest.sh
+        bash +x ./ci/release-tag/release-tag.sh
