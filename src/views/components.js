@@ -29,22 +29,12 @@ function Components(style) {
    };
 
     function createProgressBarClip(clipStart, clipEnd, clipColor) {
-
-        const progressBarClipStyle = `
-            border: 5px solid ${clipColor};
-            position: absolute;
-            top: 0rem;
-            left: ${clipStart};
-            width: calc(${clipEnd} - ${clipStart});
-        `.replace(/\ \ /g,'').split('\n').join('');
-
-        const progressBarClipHTML = `
-            <div style="${progressBarClipStyle}">
-            </div>
-        `.replace(/\ \ /g,'');
-
-        var elDiv = document.createElement("div");
-        elDiv.innerHTML = progressBarClipHTML;
+        const elDiv = document.createElement('div');
+        elDiv.style.border = `5px solid ${clipColor}`;
+        elDiv.style.position = 'absolute';
+        elDiv.style.top = '0rem';
+        elDiv.style.left = clipStart;
+        elDiv.style.width = `calc(${clipEnd} - ${clipStart})`;
         return elDiv;
     }
 
@@ -55,29 +45,35 @@ function Components(style) {
             panelCards,
             ) {
 
-        let panelHTML = `
-            <div class="${CSS_CLASS_MENU}">
-                <div class="${CSS_CLASS_MENU_BUTTON} ${CSS_CLASS_MENU_BUTTON_IMPORT}">
-                    <span class="material-symbols-outlined">upload</span>
-                    Import </div>
-                <div class="${CSS_CLASS_MENU_BUTTON} ${CSS_CLASS_MENU_BUTTON_EXPORT}">
-                    <span class="material-symbols-outlined">download</span>
-                    Export </div>
-                <div class="${CSS_INFO_BUTTON}">
-                    <span class="material-symbols-outlined">info</span>
-                    </div>
-            </div>
+        const importButton = el(
+                                `${CSS_CLASS_MENU_BUTTON} ${CSS_CLASS_MENU_BUTTON_IMPORT}`, [
+                                    elGMIcon('upload'),
+                                    el('', [], 'Import')
+                                ]);
+        importButton.addEventListener('click', onImportClick);
 
-            <div
-                class="${CSS_CLASS_PANEL}">
-                </div>`.replace(/\ \ /g,'');
+        const exportButton = el(
+                                `${CSS_CLASS_MENU_BUTTON} ${CSS_CLASS_MENU_BUTTON_EXPORT}`, [
+                                    elGMIcon('download'),
+                                    el('', [], 'Export')
+                                ]);
+        exportButton.addEventListener('click', onExportClick);
 
-        var elDiv = document.createElement("div");
-        elDiv.innerHTML = panelHTML;
-        elDiv.querySelector('.' + CSS_CLASS_MENU_BUTTON_IMPORT).addEventListener('click', onImportClick);
-        elDiv.querySelector('.' + CSS_CLASS_MENU_BUTTON_EXPORT).addEventListener('click', onExportClick);
-        elDiv.querySelector('.' + CSS_INFO_BUTTON).addEventListener('click', onInfoClick);
-        panelCards.map(pCard => ( elDiv.lastChild.appendChild(pCard) ));
+        const infoButton = el(CSS_INFO_BUTTON,
+                            [elGMIcon('info')]);
+        infoButton.addEventListener('click', onInfoClick);
+
+        const elDiv = el('', [
+            el(CSS_CLASS_MENU, [
+                importButton,
+                exportButton,
+                infoButton
+            ]),
+            el(CSS_CLASS_PANEL,
+                panelCards
+            )
+        ]);
+
         return elDiv;
     }
 
@@ -91,60 +87,93 @@ function Components(style) {
                     deleteCallback=()=>{},
                     onTextChange=()=>{}) {
 
-        let cardHTML = `
-            <div class="${CSS_CLASS_PANEL_CARD_TIME}"> ${startTime} </div>
-            <div class="${CSS_CLASS_PANEL_CARD_TIME}"> ${endTime} </div>
-            
-            <textarea class="${CSS_CLASS_PANEL_TEXT}">${cardText}</textarea>
-            
-            <div style="display: inline-block; max-width: 100%;">
-
-                <button class="${CSS_CLASS_PANEL_DELETE_BUTTON}">
-                    <span style="font-size:2rem" class="material-symbols-outlined">delete</span>
-                </button>
-            
-                <a class="${CSS_CLASS_PANEL_PLAY_BUTTON}" href=${playURL}>
-                    <span style="font-size:2rem" class="material-symbols-outlined">play_arrow</span>
-                </a>
-            
-            </div>`.replace(/\ \ /g,'');
-
-        var elDiv = document.createElement("div");
-        elDiv.className = CSS_CLASS_PANEL_CARD;
+        const elDiv = el(
+            CSS_CLASS_PANEL_CARD,
+            [el(
+                CSS_CLASS_PANEL_CARD_TIME, [],
+                startTime,
+            ), el(
+                CSS_CLASS_PANEL_CARD_TIME, [],
+                endTime,
+            ), el(
+                CSS_CLASS_PANEL_TEXT, [],
+                cardText,
+                'textarea'
+            ),
+            buttonContainer()]
+        );
         elDiv.style.backgroundColor = backgroundColor;
-        elDiv.innerHTML = cardHTML;
-        elDiv.querySelector(`.${CSS_CLASS_PANEL_DELETE_BUTTON}`).addEventListener('click', deleteCallback);
         elDiv.querySelector(`.${CSS_CLASS_PANEL_TEXT}`).addEventListener('keyup', onTextChange);
+
+        function buttonContainer() {
+            const elDeleteButton = el(CSS_CLASS_PANEL_DELETE_BUTTON, [
+                                    elGMIcon('delete')
+                                ], '', 'button');
+            elDeleteButton.addEventListener('click', deleteCallback);
+
+            const elPlayButton = el(CSS_CLASS_PANEL_PLAY_BUTTON, [
+                                        elGMIcon('play_arrow')
+                                    ], '', 'a');
+            elPlayButton.href = playURL;
+
+            const buttonContainer = el('', [
+                elDeleteButton,
+                elPlayButton,
+            ]);
+            buttonContainer.style.display = 'inline-block';
+            buttonContainer.style.maxWidth = '100%';
+            return buttonContainer;
+        }
+
         return elDiv;
     }
 
     function createBookmarkButton(onClick) {
-        const quoteButtonHTML = `
-            <div class="${CSS_CLASS_BOOKMARK_BUTTON} ${CSS_CLASS_MENU_BUTTON} ${CSS_CLASS_MENU_BUTTON_BOOKMARK_START}">
-                <span style="font-size:2rem" class="material-symbols-outlined">bookmark_add</span>
-                Bookmark </div>
-            <div class="${CSS_CLASS_BOOKMARK_BUTTON} ${CSS_CLASS_MENU_BUTTON} ${CSS_CLASS_MENU_BUTTON_BOOKMARK_OK}">
-                <span style="font-size:2rem" class="material-symbols-outlined">bookmark_added</span>
-                OK </div>
-        `;
-        const elDiv = document.createElement('div');
-        elDiv.innerHTML = quoteButtonHTML;
-        elDiv.className = CSS_CLASS_BOOKMARK_BUTTON_CONTAINER;
-        const bookmarkStartButton = elDiv.querySelector('.'+CSS_CLASS_MENU_BUTTON_BOOKMARK_START);
-        const bookmarkEndButton = elDiv.querySelector('.'+CSS_CLASS_MENU_BUTTON_BOOKMARK_OK);
 
+        const bookmarkStartButton = el(
+            `${CSS_CLASS_BOOKMARK_BUTTON} ${CSS_CLASS_MENU_BUTTON} ${CSS_CLASS_MENU_BUTTON_BOOKMARK_START}`,
+            [elGMIcon('bookmark_add'), el('',[], 'Bookmark')],
+        );
+        const bookmarkEndButton = el(
+            `${CSS_CLASS_BOOKMARK_BUTTON} ${CSS_CLASS_MENU_BUTTON} ${CSS_CLASS_MENU_BUTTON_BOOKMARK_OK}`,
+            [elGMIcon('bookmark_added'), el('',[], 'OK')],
+        );
+        
         bookmarkEndButton.style.display = 'none';
         bookmarkStartButton.addEventListener('click', () => {
             bookmarkStartButton.style.display = 'none';
             bookmarkEndButton.style.display = '';
+            onClick();
         });
         bookmarkEndButton.addEventListener('click', () => {
             bookmarkStartButton.style.display = '';
             bookmarkEndButton.style.display = 'none';
+            onClick();
         });
-        elDiv.querySelectorAll('.'+CSS_CLASS_BOOKMARK_BUTTON).forEach(el=>( el.addEventListener('click', onClick) ));
-        
+
+        const elDiv = el(
+            CSS_CLASS_BOOKMARK_BUTTON_CONTAINER, [
+                bookmarkStartButton,
+                bookmarkEndButton,
+            ],
+        );
         return elDiv;
+    }
+
+    function elGMIcon(iconName) {
+        return el('material-symbols-outlined', [], iconName, 'span');
+    }
+
+    function el(className='',
+                children = [],
+                textContent='',
+                elementTag='div', ) {
+        // SEE https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Safely_inserting_external_content_into_a_page
+        const el = document.createElement(elementTag);
+        el.className = className;
+        el.textContent = textContent;
+        children.map(child => el.appendChild(child));
+        return el;
     }
 
 };
