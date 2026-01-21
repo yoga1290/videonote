@@ -3,6 +3,8 @@
 This is a Firefox Add On that helps users to mark video segments on Youtube, BiliBili, VKVideo and possibly more to come.
 Coded in vanila Javascript & CSS, bundled through Webpack for each platform.
 
+![docs/readme.gif](docs/readme.gif)
+
 # Build
 
 - Build on Docker containers:
