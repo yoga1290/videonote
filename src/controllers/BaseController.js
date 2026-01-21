@@ -124,7 +124,7 @@ function BaseController(components, timeUtil, uiUtil, storageService) {
                 tryLoadQuotes();
             });
         };
-        const onInfoClick = () => (window.open('https://github.com/yoga1290/videonote#readme',
+        const onInfoClick = () => (window.open('https://addons.mozilla.org/addon/videonote',
                                                 '_blank',
                                                 ('vnote-'+new Date().getTime()) ));
 
