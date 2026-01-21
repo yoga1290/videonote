@@ -1,9 +1,10 @@
 # What's this?
 
-This is a Firefox Add On that helps users to mark video segments on Youtube, BiliBili, VKVideo and possibly more to come.
+This is a Firefox Add On that let's you mark video segments and add notes. Notes are only saved in-browser.
+Allows Import/Export all the notes as CSV file. Works across Youtube, BiliBili &amp; VK-Video video platforms.
 Coded in vanila Javascript & CSS, bundled through Webpack for each platform.
 
-![docs/readme.gif](docs/readme.gif)
+![docs/readme.png](docs/readme.png)
 
 # Build
 
@@ -18,6 +19,7 @@ Coded in vanila Javascript & CSS, bundled through Webpack for each platform.
 
 # Usage:
 
+![docs/readme.gif](docs/readme.gif)
 
 1- Open Youtube video page or a supported platform.
 
