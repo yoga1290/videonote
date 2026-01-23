@@ -139,14 +139,29 @@ function Components(style) {
             [elGMIcon('bookmark_added'), el('',[], 'OK')],
         );
         
+        const setStyle = (el) => {
+            el.style.position = 'relative';
+            el.style.top = '-11rem';
+            el.style.height = '2rem';
+            el.style.fontSize = '1.5rem';
+            el.style.color = 'white';
+            el.style.display = 'inline-flex';
+            el.style.pointer = 'cursor';
+            el.style.border = '5px solid black';
+        };
+        setStyle(bookmarkStartButton);
+        setStyle(bookmarkEndButton);
+        bookmarkStartButton.style.backgroundColor = '#4CAF50';
+        bookmarkEndButton.style.backgroundColor = 'rgb(201, 75, 75)';
+        
         bookmarkEndButton.style.display = 'none';
         bookmarkStartButton.addEventListener('click', () => {
             bookmarkStartButton.style.display = 'none';
-            bookmarkEndButton.style.display = '';
+            bookmarkEndButton.style.display = 'inline-flex';
             onClick();
         });
         bookmarkEndButton.addEventListener('click', () => {
-            bookmarkStartButton.style.display = '';
+            bookmarkStartButton.style.display = 'inline-flex';
             bookmarkEndButton.style.display = 'none';
             onClick();
         });

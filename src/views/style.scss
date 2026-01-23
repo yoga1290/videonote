@@ -132,24 +132,3 @@
     color: white;
     background-color: black;
 }
-
-.vnote-bookmark {
-    position: absolute;
-    width: 0rem;
-    height: 0rem;
-
-    .vnote-bookmark__start-button {
-        color: white;
-        background-color: #4CAF50;
-    }
-    .vnote-bookmark__ok-button {
-        color: white;
-        background-color: rgb(201, 75, 75);      
-    }
-
-    .vnote-bookmark__button {
-        top: -11rem;
-        height: 2rem;
-        font-size: 1.5rem;
-    }
-}

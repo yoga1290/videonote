@@ -53,9 +53,6 @@ function VKVideoController(baseController, style, timeUtil, uiUtil) {
         const playButton = document.querySelectorAll('.shadow-root-container')[0].shadowRoot.querySelectorAll('.preview-track-horizontally-alinged .player-wrapper .keyboard-controls .wrapper-bottom .controls .controls-left .btn-container .tooltip-wrapper button')[0];
 
         const highlighButtonContainer = document.querySelectorAll('.shadow-root-container')[0].shadowRoot.firstChild;
-        const playButtonContainer = document.createElement('div');
-        playButtonContainer.style.position = 'absolute';
-        highlighButtonContainer.appendChild(playButtonContainer);
 
         style.init(highlighButtonContainer);
 
