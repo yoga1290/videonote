@@ -21,19 +21,26 @@ Coded in vanila Javascript & CSS, bundled through Webpack for each platform.
 
 ![docs/readme.gif](docs/readme.gif)
 
-1- Open Youtube video page or a supported platform.
-
-2- Wait for Videonote panel to load below the video.
-
-3- Play the video.
-
-4- Click the "Bookmark" button to start marking the video bar.
-
-5- Click the "OK" button to mark the end of the video segment.
-
-6- Optionally, write or edit or delete a note from the panel cards.
-
+1. Open Youtube video page or a supported platform.
+2. Wait for Videonote panel to load below the video.
+3. Play the video.
+4. Click the "**Bookmark**" button to start marking the video bar.
+5. Click the "**OK**" button to mark the end of the video segment.
+6. Optionally, write or edit or delete a note from the panel cards.
     - Note, it gets prefilled using the transcripts/CC caption of Youtube (Desktop).
+7. Optionally, you can **Export** and **Import** all of the notes across all supported platforms into CSV file.
 
-7- Optionally, you can Export / Import of all notes across all supported platforms into CSV file.
+---
 
+# Development
+
+![docs/readme-uml.puml](docs/readme-uml.png)
+
++ Use `npm start` to trigger the build process among side, openning it on local Firefox.
++ Webpack is used to compile the `base-bundle.js` and platform-specific bundles.
+
+---
+
+# Support
+
++ Feel free to [**rise an Issue**](https://github.com/yoga1290/videonote/issues/new?template=bug_report.md) or [**Proposal a feature**](https://github.com/yoga1290/videonote/issues/new?template=feature_request.md)

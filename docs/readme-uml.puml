@@ -1,0 +1,35 @@
+@startuml
+package "base-bundle" {
+  class BaseController
+  class Components {
+    + createPanel(..): HTMLElement
+    + createPanelCard(..): HTMLElement
+    + createBookmarkButton(..): HTMLElement
+    + createProgressBarClip(..): HTMLElement
+  }
+  BaseController <.. StorageService: Add-on store API
+  BaseController <.. Components
+  BaseController <.. Styles
+}
+
+package "youtube-bundle" {
+  class YoutubeController
+}
+package "youtube-mobile-bundle" {
+  class YoutubeMobileController
+}
+
+package "bilibili-bundle" {
+  class BiliBiliController
+}
+
+package "vkvideo-bundle" {
+  class VKVideoController
+}
+
+YoutubeController *-- BaseController
+YoutubeMobileController *-- BaseController
+BiliBiliController *-- BaseController
+VKVideoController *-- BaseController
+
+@enduml
