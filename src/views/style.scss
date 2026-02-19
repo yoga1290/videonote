@@ -132,3 +132,17 @@
     color: white;
     background-color: black;
 }
+
+.vnote-bookmark {
+    position: absolute;
+    left: 0rem;
+    width: 0rem;
+    height: 0rem;
+
+    .vnote-bookmark__button {
+        position: absolute;
+        left: 0rem;
+        width: 9rem;
+    }
+}
+
