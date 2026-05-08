@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "VideoNote",
   "version": "VERSION_TAG",
-  "description": "See https://github.com/yoga1290/videonote#readme",
+  "description": "https://addons.mozilla.org/en-US/firefox/addon/videonote",
   "browser_specific_settings": {
       "gecko": {
         "data_collection_permissions": {
