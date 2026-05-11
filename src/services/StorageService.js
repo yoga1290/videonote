@@ -45,7 +45,7 @@ function StorageService() {
         function processedDataOfCurrentFile(fileReader, processedData) {
 
             let mapCSVColumnsIdxToColumnKey = {}; //e.g: { 0: 'text', 1: 'url',..}
-            fileReader.result.split(/[^,\w]+\n/g).map((line, lineNum) => {
+            fileReader.result.split(/[^,.]+\"\n/g).map((line, lineNum) => {
                     if (lineNum == 0) {
                         mapCSVColumnsIdxToColumnKey = getCSVColumnsIdxToColumnNameMap(line);
                         return; // skip CSV Header line
