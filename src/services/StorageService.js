@@ -54,7 +54,7 @@ function StorageService() {
                     let item = {};
                     line.split(CSV_SEPERATOR).map((rec, csvColumnIdx) => {
                         const colOrderKey = mapCSVColumnsIdxToColumnKey[csvColumnIdx];
-                        rec = rec.replace(/\\"/g, '"').replace(/\\n/g, '\n');
+                        rec = rec.replace(/""/g, '"').replace(/\\n/g, '\n');
                         rec = rec.substring(1, rec.length);
                         item[colOrderKey] = rec;
                     });
@@ -92,7 +92,7 @@ function StorageService() {
                         '"' +
                         COL_ORDER.map(colKey => (
                             !!!rec[colKey]? ' ':
-                            ( rec[colKey] + '').replace(/\"/g, '\\"') )).join(CSV_SEPERATOR) +
+                            ( rec[colKey] + '').replace(/\"/g, '""') )).join(CSV_SEPERATOR) +
                         '"'
                         ))
                 .join('\n') + '\n';
