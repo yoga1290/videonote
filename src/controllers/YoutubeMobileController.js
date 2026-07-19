@@ -119,10 +119,9 @@ function YoutubeMobileController(baseController, timeUtil, uiUtil, Logger) {
             return { serviceId, videoId, url };
         }
 
-    function getTranscript() { //TODO
-
-        var SEL_TRANSCRIPT_TEXT = '.ytd-transcript-segment-renderer .segment-text';
-        var SEL_TRANSCRIPT_TIME = '.ytd-transcript-segment-renderer .segment-timestamp';
+    function getTranscript() {
+        var SEL_TRANSCRIPT_TEXT = '.ytwTranscriptSegmentViewModelHost .ytAttributedStringHost.ytAttributedStringLinkInheritColor';
+        var SEL_TRANSCRIPT_TIME = '.ytwTranscriptSegmentViewModelTimestamp';
         var SEL_TRANSCRIPT_SHOW_BUTTON = '.ytd-video-description-transcript-section-renderer button';
 
         return new Promise((res, rej) => {

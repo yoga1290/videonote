@@ -251,7 +251,6 @@ function BaseController(components, timeUtil, uiUtil, storageService) {
             const key = serviceId + '#' + videoId;
             browser.storage.local.get(key)
                         .then((data) => {
-                            console.log('tryLoadQuotes data', data);
                             quotes = data[key] || [];
                             renderUI();
                         }, (e) => (console.error(e)));
